@@ -22,19 +22,6 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-
-
-    //Create student (Registration)
-    @PostMapping("/register")
-    public ResponseEntity<String> createStudent(@Valid @RequestBody StudentCreateDTO student){
-        studentService.createStudent(student);
-        return ResponseEntity.status(HttpStatus.CREATED).body("User Created");
-
-    }
-
-
-
-
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponseDTO> getStudentById(@PathVariable UUID id){
         StudentResponseDTO responseByIdStudent = studentService.getStudentById(id);

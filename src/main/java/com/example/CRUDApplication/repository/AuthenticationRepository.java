@@ -23,9 +23,8 @@ public class AuthenticationRepository {
     public boolean studentLogin(StudentLoginDTO studentLoginDTO){
 
         Record studentExists = dsl.select()
-                .from(DSL.table("student"))
-                .where(DSL.field("student_admission_no").eq(studentLoginDTO.getAdmissionNo())
-                        .and(DSL.field("student_email").eq(studentLoginDTO.getEmail())))
+                .from(DSL.table("USERS"))
+                .where(DSL.field("student_email").eq(studentLoginDTO.getEmail()))
                 .fetchOne();
 
 

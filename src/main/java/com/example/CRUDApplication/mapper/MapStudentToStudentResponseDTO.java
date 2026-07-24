@@ -18,7 +18,7 @@ public class MapStudentToStudentResponseDTO {
 
         studentResponseDTO.setName(student.getName());
         studentResponseDTO.setAge(student.getAge());
-        studentResponseDTO.setEmail(student.getEmail());
+
         studentResponseDTO.setRollNo(student.getRollNo());
 
 

@@ -16,6 +16,22 @@ public class StudentUpdateDTO {
     @NotNull(message = "Please select a valid course option.")
     private Courses course;
 
+    @NotBlank
+    @Size(min = 6, max = 6)
+    @Pattern(
+            regexp = "^\\d{2}[A-Z]\\d{3}$",
+            message = "Admission number must match the strict format: YY[Letter]NNN (e.g., 22B030)"
+    )
+    private String admissionNo;
+
+    @NotBlank
+    @Size(min = 10, max = 10)
+    @Pattern(
+            regexp = "^[A-Z]{3}\\d{2}[A-Z]{2}\\d{3}$",
+            message = "Roll number must match the format: [CLG CODE]YY[DEPT CODE]NNN (e.g., TCR22EC066)"
+    )
+    private String rollNo;
+
 
     public String getName() {
         return name;
@@ -40,5 +56,21 @@ public class StudentUpdateDTO {
 
     public void setCourse(Courses course) {
         this.course = course;
+    }
+
+    public String getAdmissionNo() {
+        return admissionNo;
+    }
+
+    public void setAdmissionNo(String admissionNo) {
+        this.admissionNo = admissionNo;
+    }
+
+    public String getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(String rollNo) {
+        this.rollNo = rollNo;
     }
 }

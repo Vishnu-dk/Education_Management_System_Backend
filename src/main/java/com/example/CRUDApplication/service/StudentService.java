@@ -32,13 +32,6 @@ public class StudentService  {
 
 
 
-    @Transactional
-    public void createStudent(StudentCreateDTO studentReg) {
-        boolean status=studentRepository.save(studentReg);
-        if(!status){
-            throw new DuplicateUserException("Invalid input (User already Exists)");
-        }
-    }
 
     public StudentResponseDTO getStudentById(UUID id) { // Changed Long to Integer
         Record studentResponse = studentRepository.findByIdAndDeletedIsFalse(id);

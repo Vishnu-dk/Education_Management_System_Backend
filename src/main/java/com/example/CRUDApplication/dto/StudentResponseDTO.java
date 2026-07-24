@@ -10,7 +10,7 @@ public class StudentResponseDTO {
     private String rollNo;
     private int age;
     private Courses course;
-    private String email;
+
 
 
 
@@ -54,11 +54,5 @@ public class StudentResponseDTO {
         this.course = course;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.CRUDApplication.controller;
 
 import com.example.CRUDApplication.dto.StudentLoginDTO;
+import com.example.CRUDApplication.dto.UserRegisterDTO;
 import com.example.CRUDApplication.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 
 
 @RestController
-@RequestMapping("/api/students/login")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -23,11 +24,23 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<String> studentLogin(@Valid @RequestBody StudentLoginDTO studentLoginDTO){
+    @PostMapping("/login")
+    public ResponseEntity<String> authLogin(@Valid @RequestBody StudentLoginDTO studentLoginDTO){
 
         String token=authenticationService.loginStudent(studentLoginDTO);
         return ResponseEntity.ok("Bearer Token : "+token) ;
 
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(
+            @Valid
+            @RequestBody UserRegisterDTO dto){
+
+        authenticationService.registerUser(dto);
+
+        return ResponseEntity.ok(
+                "User Registered Successfully"
+        );
     }
 }

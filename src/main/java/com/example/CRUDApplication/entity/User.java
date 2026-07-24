@@ -1,13 +1,35 @@
 package com.example.CRUDApplication.entity;
 
+import jakarta.persistence.*;
 import java.util.UUID;
 
+@Entity
+@Table(name = "USERS")
 public class User {
-    UUID id;
-    String email;
-    String password;
-    Role role;
-    boolean active;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id", columnDefinition = "UUID")
+    private UUID id;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    @Column(name = "active")
+    private boolean active;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Student student;
+
+    public User() {
+    }
 
     public UUID getId() {
         return id;
@@ -47,5 +69,13 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

@@ -24,8 +24,7 @@ public class MapRecordToStudent {
         if (courseStr != null) {
             student.setCourse(Courses.valueOf(courseStr));
         }
-        student.setEmail(record.get("student_email", String.class));
-        student.setPassword(record.get("student_password", String.class));
+
 
         return student;
     }
