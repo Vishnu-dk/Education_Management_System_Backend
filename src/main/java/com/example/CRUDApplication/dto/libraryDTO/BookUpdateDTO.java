@@ -1,48 +1,38 @@
-package com.example.CRUDApplication.entity.libraryEntity;
+package com.example.CRUDApplication.dto.libraryDTO;
 
-import jakarta.persistence.*;
+import com.example.CRUDApplication.entity.libraryEntity.BookCategory;
+import jakarta.validation.constraints.*;
 
-import java.util.UUID;
+public class BookUpdateDTO {
 
-@Entity
-@Table(name = "BOOK")
-public class Book {
+    @Size(max = 30)
+    private String isbn;
 
-    @Id
-    @Column(name = "book_id")
-    private UUID id;
-
-
-    @Column(name = "book_title",nullable = false)
+    @Size(min = 2, max = 255)
     private String title;
 
-    @Column(name = "author_name",nullable = false)
+    @Size(min = 2, max = 255)
     private String author;
 
+    @Size(min = 2, max = 255)
     private String publisher;
 
-    @Column(name = "publication_year")
+    @Min(1800)
+    @Max(2100)
     private Integer publicationYear;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "book_category")
     private BookCategory category;
 
-    @Column(name = "total_copies",nullable = false)
+    @Min(0)
     private Integer totalCopies;
 
-    @Column(name = "available_copies",nullable = false)
+    @Min(0)
     private Integer availableCopies;
 
-    @Column(name = "active")
-    private boolean active;
+    private Boolean active;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public String getIsbn() {
+        return isbn;
     }
 
 
@@ -103,11 +93,11 @@ public class Book {
         this.availableCopies = availableCopies;
     }
 
-    public boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 }

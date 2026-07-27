@@ -57,6 +57,6 @@ public class AdminAuthService {
             );
         }
 
-        return jwtService.generateToken(dto.getEmail());
+        return jwtService.generateToken(dto.getEmail(),"ADMIN");
     }
 }

@@ -42,6 +42,6 @@ public class StudentAuthService {
             );
         }
 
-        return jwtService.generateToken(dto.getEmail());
+        return jwtService.generateToken(dto.getEmail(),"STUDENT");
     }
 }

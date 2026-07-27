@@ -1,40 +1,27 @@
-package com.example.CRUDApplication.entity.libraryEntity;
+package com.example.CRUDApplication.dto.libraryDTO;
 
-import jakarta.persistence.*;
+import com.example.CRUDApplication.entity.libraryEntity.BookCategory;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "BOOK")
-public class Book {
+public class BookAdminResponseDTO {
 
-    @Id
-    @Column(name = "book_id")
     private UUID id;
 
-
-    @Column(name = "book_title",nullable = false)
     private String title;
 
-    @Column(name = "author_name",nullable = false)
     private String author;
 
     private String publisher;
 
-    @Column(name = "publication_year")
     private Integer publicationYear;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "book_category")
     private BookCategory category;
 
-    @Column(name = "total_copies",nullable = false)
     private Integer totalCopies;
 
-    @Column(name = "available_copies",nullable = false)
     private Integer availableCopies;
 
-    @Column(name = "active")
     private boolean active;
 
     public UUID getId() {
@@ -44,8 +31,6 @@ public class Book {
     public void setId(UUID id) {
         this.id = id;
     }
-
-
 
     public String getTitle() {
         return title;
