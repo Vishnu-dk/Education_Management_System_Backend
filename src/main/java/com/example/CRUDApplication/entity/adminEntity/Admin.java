@@ -1,34 +1,34 @@
-package com.example.CRUDApplication.entity;
+package com.example.CRUDApplication.entity.adminEntity;
 
 import jakarta.persistence.*;
+
 import java.util.UUID;
 
 @Entity
-@Table(name = "USERS")
-public class User {
+@Table(name = "ADMIN")
+public class Admin {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", columnDefinition = "UUID")
+    @Column(name = "admin_id", columnDefinition = "UUID")
     private UUID id;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email",
+            nullable = false,
+            unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password",
+            nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role role;
+    private AdminRole role;
 
     @Column(name = "active")
     private boolean active;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Student student;
-
-    public User() {
+    public Admin() {
     }
 
     public UUID getId() {
@@ -55,11 +55,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
+    public AdminRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(AdminRole role) {
         this.role = role;
     }
 
@@ -69,13 +69,5 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 }

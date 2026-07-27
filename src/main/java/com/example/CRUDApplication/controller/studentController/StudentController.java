@@ -1,11 +1,9 @@
-package com.example.CRUDApplication.controller;
+package com.example.CRUDApplication.controller.studentController;
 
-import com.example.CRUDApplication.dto.StudentCreateDTO;
-import com.example.CRUDApplication.dto.StudentResponseDTO;
-import com.example.CRUDApplication.dto.StudentUpdateDTO;
+import com.example.CRUDApplication.dto.studentDTO.StudentResponseDTO;
+import com.example.CRUDApplication.dto.studentDTO.StudentUpdateDTO;
 import com.example.CRUDApplication.service.StudentService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

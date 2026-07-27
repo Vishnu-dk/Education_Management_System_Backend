@@ -1,22 +1,16 @@
 package com.example.CRUDApplication.service;
 
-import com.example.CRUDApplication.exception.DuplicateUserException;
 import com.example.CRUDApplication.exception.ResourceNotFoundException;
-import com.example.CRUDApplication.mapper.MapRecordToStudent;
-import com.example.CRUDApplication.mapper.MapStudentToStudentResponseDTO;
-import com.example.CRUDApplication.dto.StudentCreateDTO;
-import com.example.CRUDApplication.dto.StudentResponseDTO;
-import com.example.CRUDApplication.dto.StudentUpdateDTO;
-import com.example.CRUDApplication.entity.Student;
-import com.example.CRUDApplication.repository.StudentRepository;
+import com.example.CRUDApplication.mapper.studentMapper.MapRecordToStudent;
+import com.example.CRUDApplication.mapper.studentMapper.MapStudentToStudentResponseDTO;
+import com.example.CRUDApplication.dto.studentDTO.StudentResponseDTO;
+import com.example.CRUDApplication.dto.studentDTO.StudentUpdateDTO;
+import com.example.CRUDApplication.entity.studentEntity.Student;
+import com.example.CRUDApplication.repository.studentRepository.StudentRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.jooq.Record;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

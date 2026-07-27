@@ -1,7 +1,7 @@
-package com.example.CRUDApplication.mapper;
+package com.example.CRUDApplication.mapper.studentMapper;
 
-import com.example.CRUDApplication.dto.StudentResponseDTO;
-import com.example.CRUDApplication.entity.Student;
+import com.example.CRUDApplication.dto.studentDTO.StudentResponseDTO;
+import com.example.CRUDApplication.entity.studentEntity.Student;
 
 public class MapStudentToStudentResponseDTO {
 

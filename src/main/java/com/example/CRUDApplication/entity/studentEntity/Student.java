@@ -1,4 +1,4 @@
-package com.example.CRUDApplication.entity;
+package com.example.CRUDApplication.entity.studentEntity;
 
 import jakarta.persistence.*;
 
@@ -9,36 +9,33 @@ import java.util.UUID;
 public class Student {
 
     @Id
-    @GeneratedValue
     @Column(name = "student_id", columnDefinition = "UUID")
     private UUID id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, unique = true)
-    private User user;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-    @Column(name = "student_name", nullable = false)
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "active")
+    private boolean active;
+
+    @Column(name = "student_name")
     private String name;
 
-    @Column(name = "student_admission_no", nullable = false, unique = true)
+    @Column(name = "student_admission_no", unique = true)
     private String admissionNo;
 
-    @Column(name = "student_rollno", nullable = false, unique = true)
+    @Column(name = "student_rollno", unique = true)
     private String rollNo;
 
     @Column(name = "student_age")
-    private int age;
+    private Integer age;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "course")
     private Courses course;
-
-
-
-
-    public Student() {
-    }
-
 
     public UUID getId() {
         return id;
@@ -46,6 +43,30 @@ public class Student {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -72,11 +93,11 @@ public class Student {
         this.rollNo = rollNo;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

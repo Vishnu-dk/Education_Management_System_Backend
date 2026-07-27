@@ -1,7 +1,6 @@
-package com.example.CRUDApplication.repository;
+package com.example.CRUDApplication.repository.studentRepository;
 
-import com.example.CRUDApplication.dto.StudentCreateDTO;
-import com.example.CRUDApplication.dto.StudentUpdateDTO;
+import com.example.CRUDApplication.dto.studentDTO.StudentUpdateDTO;
 import jakarta.validation.constraints.NotNull;
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -66,6 +65,9 @@ public class StudentRepository {
             dsl.deleteFrom(DSL.table("STUDENT"))
                     .where(DSL.field("student_id").eq(id))
                     .execute();
+            dsl.deleteFrom(DSL.table("USERS"))
+                    .where(DSL.field("user_id").eq(id))
+                    .execute();
             return true;
         }
         return false;
@@ -84,4 +86,5 @@ public class StudentRepository {
                 .from(DSL.table("STUDENT"))
                 .fetch();
     }
+
 }

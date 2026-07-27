@@ -1,6 +1,6 @@
-package com.example.CRUDApplication.dto;
+package com.example.CRUDApplication.dto.studentDTO;
 
-import com.example.CRUDApplication.entity.Courses;
+import com.example.CRUDApplication.entity.studentEntity.Courses;
 
 public class StudentResponseDTO {
 

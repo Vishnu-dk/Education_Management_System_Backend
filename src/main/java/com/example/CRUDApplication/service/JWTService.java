@@ -1,7 +1,6 @@
 package com.example.CRUDApplication.service;
 
 
-import com.example.CRUDApplication.dto.StudentLoginDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -35,7 +34,7 @@ public class JWTService {
 
     }
 
-    public String generateToken(StudentLoginDTO studentLoginDTO) {
+    public String generateToken(String email) {
 
 
         Map<String,Object> claims= new HashMap<>();
@@ -43,7 +42,7 @@ public class JWTService {
         return Jwts.builder()
                 .claims()
                 .add(claims)
-                .subject(studentLoginDTO.getEmail())
+                .subject(email)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis()+60*60*100))
                 .and()

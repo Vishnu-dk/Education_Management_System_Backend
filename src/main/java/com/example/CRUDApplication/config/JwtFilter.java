@@ -1,8 +1,7 @@
 package com.example.CRUDApplication.config;
 
+import com.example.CRUDApplication.service.CustomAuthService;
 import com.example.CRUDApplication.service.JWTService;
-import com.example.CRUDApplication.service.StudentService;
-import com.example.CRUDApplication.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = context.getBean(UserService.class).loadUserByUsername(username);
+            UserDetails userDetails = context.getBean(CustomAuthService.class).loadUserByUsername(username);
 
             if (jwtService.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken =

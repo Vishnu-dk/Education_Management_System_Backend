@@ -1,27 +1,19 @@
-package com.example.CRUDApplication.dto;
+package com.example.CRUDApplication.dto.adminDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class StudentActionDTO {
-
-    @NotBlank
-    @Size(min = 1, max = 7)
-    private String admissionNo;
+public class AdminLoginDTO {
 
     @NotBlank
     @Email
     @Size(max = 225)
     private String email;
 
-    public String getAdmissionNo() {
-        return admissionNo;
-    }
-
-    public void setAdmissionNo(String admissionNo) {
-        this.admissionNo = admissionNo;
-    }
+    @NotBlank
+    @Size(min = 6, max = 225)
+    private String password;
 
     public String getEmail() {
         return email;
@@ -29,5 +21,13 @@ public class StudentActionDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

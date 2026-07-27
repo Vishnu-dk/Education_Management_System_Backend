@@ -1,12 +1,10 @@
-package com.example.CRUDApplication.dto;
+package com.example.CRUDApplication.dto.studentDTO;
 
-import com.example.CRUDApplication.entity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class UserRegisterDTO {
+public class StudentLoginDTO {
 
     @NotBlank
     @Email
@@ -16,9 +14,6 @@ public class UserRegisterDTO {
     @NotBlank
     @Size(min = 6, max = 225)
     private String password;
-
-    @NotNull
-    private Role role;
 
     public String getEmail() {
         return email;
@@ -34,13 +29,5 @@ public class UserRegisterDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
