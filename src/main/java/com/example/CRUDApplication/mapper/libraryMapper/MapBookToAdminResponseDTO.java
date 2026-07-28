@@ -31,6 +31,7 @@ public class MapBookToAdminResponseDTO {
         dto.setTotalCopies(book.getTotalCopies());
 
         dto.setAvailableCopies(book.getAvailableCopies());
+        dto.setActive(book.isActive());
 
         return dto;
     }

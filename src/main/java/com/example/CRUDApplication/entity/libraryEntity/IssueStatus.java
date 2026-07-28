@@ -6,5 +6,4 @@ public enum IssueStatus {
     REJECTED,
     RETURNED,
     OVERDUE
-
 }

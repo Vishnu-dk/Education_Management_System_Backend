@@ -117,4 +117,36 @@ public class BookRepository {
         return value.trim().toLowerCase();
     }
 
+    public Record findActiveBookById(UUID bookId){
+
+        return dsl.select()
+                .from("BOOK")
+                .where(DSL.field("book_id").eq(bookId))
+                .and(DSL.field("active").eq(true))
+                .fetchOne();
+    }
+
+
+    public void reduceCopies(UUID bookId){
+
+
+        Book book=MapRecordToBook.recordToBookMap(findById(bookId));
+
+        dsl.update(DSL.table("BOOK"))
+                .set(DSL.field("available_copies"),book.getAvailableCopies()-1)
+                .where(DSL.field("book_id").eq(bookId))
+                .execute();
+    }
+
+    public void increaseCopies(UUID bookId){
+
+
+        Book book=MapRecordToBook.recordToBookMap(findById(bookId));
+
+        dsl.update(DSL.table("BOOK"))
+                .set(DSL.field("available_copies"),book.getAvailableCopies()+1)
+                .where(DSL.field("book_id").eq(bookId))
+                .execute();
+    }
+
 }
