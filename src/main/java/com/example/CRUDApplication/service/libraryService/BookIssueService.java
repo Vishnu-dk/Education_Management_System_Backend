@@ -193,16 +193,16 @@ public class BookIssueService {
     }
 
 
-    public List<BookIssueResponseDTO> getAllRequests(){
+    public List<BookIssueResponseDTO> getAllRequests(Boolean active, LocalDate approveDate, LocalDate dueDate, IssueStatus status,String sortDirection,String sortBy){
 
-        Result<? extends Record> records = bookIssueRepository.findAllRequests();
+        Result<? extends Record> records = bookIssueRepository.findAllRequests(active,approveDate,dueDate,status,sortDirection,sortBy);
         return records.stream()
                 .map(MapRecordToBookIssueResponseDTO::map)
                 .toList();
     }
 
 
-    public List<BookIssueResponseDTO> getStudentBooks(){
+    public List<BookIssueResponseDTO> getStudentBooks(Boolean active, LocalDate approveDate, LocalDate dueDate, IssueStatus status,String sortDirection,String sortBy){
 
         String email =
                 SecurityContextHolder
@@ -215,7 +215,7 @@ public class BookIssueService {
 
         UUID studentId =
                 student.getId();
-        Result<? extends Record> records = bookIssueRepository.getStudentBooks(studentId);
+        Result<? extends Record> records = bookIssueRepository.getStudentBooks(studentId,active,approveDate,dueDate,status,sortDirection,sortBy);
         return records.stream()
                 .map(MapRecordToBookIssueResponseDTO::map)
                 .toList();

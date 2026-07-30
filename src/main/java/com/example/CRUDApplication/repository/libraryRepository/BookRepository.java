@@ -3,8 +3,10 @@ package com.example.CRUDApplication.repository.libraryRepository;
 import com.example.CRUDApplication.dto.libraryDTO.BookCreateDTO;
 import com.example.CRUDApplication.dto.libraryDTO.BookUpdateDTO;
 import com.example.CRUDApplication.entity.libraryEntity.Book;
+import com.example.CRUDApplication.entity.libraryEntity.BookCategory;
 import com.example.CRUDApplication.mapper.libraryMapper.MapRecordToBook;
 import org.jooq.DSLContext;
+import org.jooq.OrderField;
 import org.jooq.Record;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
@@ -44,20 +46,77 @@ public class BookRepository {
                 .where(DSL.field("book_id").eq(id))
                 .fetchOne();
     }
-    public List<Record> findAll(){
+    public List<Record> findAll(String title, BookCategory category, String sortBy, String sortDirection){
 
-        return dsl.select()
+        var query= dsl.select()
                 .from("BOOK")
-                .where(DSL.field("active").eq(true))
-                .fetch();
+                .where(DSL.field("active").eq(true));
+
+
+        if (title != null && !title.isBlank()) {
+            query = query.and(
+                    DSL.lower(DSL.field("book_title", String.class)).contains(title.toLowerCase())
+            );
+        }
+
+        if (category != null) {
+            query = query.and(DSL.field("book_category").eq(category.name()));
+        }
+
+        OrderField<?> orderField = null;
+        if ("title".equalsIgnoreCase(sortBy)) {
+            orderField = "desc".equalsIgnoreCase(sortDirection)
+                    ? DSL.field("book_title").desc()
+                    : DSL.field("book_title").asc();
+        } else if ("year".equalsIgnoreCase(sortBy)) {
+            orderField = "desc".equalsIgnoreCase(sortDirection)
+                    ? DSL.field("publication_year").desc()
+                    : DSL.field("publication_year").asc();
+        }
+
+
+        return orderField != null ? query.orderBy(orderField).fetch() : query.fetch();
     }
 
-    public List<Record> findAllForAdmin(){
+    public List<Record> findAllForAdmin(String title, BookCategory category, String sortBy, String sortDirection,Boolean active) {
+        var query = dsl.select().from("BOOK");
+        var condition = DSL.noCondition();
 
-        return dsl.select()
-                .from("BOOK")
-                .fetch();
+        if (title != null && !title.isBlank()) {
+            condition = condition.and(
+                    DSL.lower(DSL.field("book_title", String.class)).contains(title.toLowerCase())
+            );
+        }
+
+        if (category != null) {
+            condition = condition.and(DSL.field("book_category").eq(category.name()));
+        }
+        if(active!=null){
+            if(active==true){
+                condition=condition.and(DSL.field("active").isTrue());
+            } else if (!active) {
+                condition=condition.and(DSL.field("active").isFalse());
+            }
+        }
+
+
+
+        OrderField<?> orderField = null;
+        if ("title".equalsIgnoreCase(sortBy)) {
+            orderField = "desc".equalsIgnoreCase(sortDirection)
+                    ? DSL.field("book_title").desc()
+                    : DSL.field("book_title").asc();
+        } else if ("year".equalsIgnoreCase(sortBy)) {
+            orderField = "desc".equalsIgnoreCase(sortDirection)
+                    ? DSL.field("publication_year").desc()
+                    : DSL.field("publication_year").asc();
+        }
+
+        var finalQuery = query.where(condition);
+        return orderField != null ? finalQuery.orderBy(orderField).fetch() : finalQuery.fetch();
     }
+
+
 
     public boolean updateBook(UUID id,BookUpdateDTO dto){
 

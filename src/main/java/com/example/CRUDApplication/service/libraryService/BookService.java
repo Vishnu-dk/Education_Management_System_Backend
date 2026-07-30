@@ -5,6 +5,7 @@ import com.example.CRUDApplication.dto.libraryDTO.BookCreateDTO;
 import com.example.CRUDApplication.dto.libraryDTO.BookStudentResponseDTO;
 import com.example.CRUDApplication.dto.libraryDTO.BookUpdateDTO;
 import com.example.CRUDApplication.entity.libraryEntity.Book;
+import com.example.CRUDApplication.entity.libraryEntity.BookCategory;
 import com.example.CRUDApplication.exception.DuplicateUserException;
 import com.example.CRUDApplication.exception.ResourceNotFoundException;
 import com.example.CRUDApplication.mapper.libraryMapper.MapBookToAdminResponseDTO;
@@ -75,10 +76,10 @@ public class BookService {
                 .bookToStudentResponseDTO(book);
     }
 
-    public List<BookAdminResponseDTO> getAllBooksForAdmin(){
+    public List<BookAdminResponseDTO> getAllBooksForAdmin(String title, BookCategory category,String sortBy,String sortDirection,Boolean active){
 
         List<Record> records =
-                bookRepository.findAllForAdmin();
+                bookRepository.findAllForAdmin(title,category,sortBy,sortDirection,active);
 
         if(records == null || records.isEmpty()){
             throw new ResourceNotFoundException(
@@ -92,10 +93,10 @@ public class BookService {
                 .toList();
     }
 
-    public List<BookStudentResponseDTO> getAllBooksForStudents(){
+    public List<BookStudentResponseDTO> getAllBooksForStudents(String title, BookCategory category, String sortBy, String sortDirection){
 
         List<Record> records =
-                bookRepository.findAll();
+                bookRepository.findAll(title,category,sortBy,sortDirection);
 
         if(records == null || records.isEmpty()){
             throw new ResourceNotFoundException(

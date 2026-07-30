@@ -3,6 +3,7 @@ package com.example.CRUDApplication.controller.libraryController;
 import com.example.CRUDApplication.dto.libraryDTO.BookAdminResponseDTO;
 import com.example.CRUDApplication.dto.libraryDTO.BookCreateDTO;
 import com.example.CRUDApplication.dto.libraryDTO.BookUpdateDTO;
+import com.example.CRUDApplication.entity.libraryEntity.BookCategory;
 import com.example.CRUDApplication.service.libraryService.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,23 @@ public class BookAdminController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BookAdminResponseDTO>> getAllBooks() {
+    public ResponseEntity<List<BookAdminResponseDTO>> getAllBooks(
+            @RequestParam(required = false)
+            String title,
+            @RequestParam(required = false)
+            BookCategory category,
+            @RequestParam(required = false)
+            String sortBy,
+            @RequestParam(required = false)
+            String sortDirection,
+            @RequestParam(required = false)
+            Boolean active
+    ) {
 
         return ResponseEntity.ok(
-                bookService.getAllBooksForAdmin()
+                bookService.getAllBooksForAdmin(
+                        title,category,sortBy,sortDirection,active
+                )
         );
     }
 

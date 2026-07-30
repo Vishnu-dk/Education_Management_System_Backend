@@ -2,6 +2,7 @@ package com.example.CRUDApplication.repository.libraryRepository;
 
 import com.example.CRUDApplication.entity.libraryEntity.IssueStatus;
 import org.jooq.DSLContext;
+import org.jooq.OrderField;
 import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.impl.DSL;
@@ -48,9 +49,9 @@ public class BookIssueRepository {
 
 
 
-    public Result<? extends  Record> findAllRequests() {
+    public Result<? extends  Record> findAllRequests(Boolean active, LocalDate approveDate, LocalDate dueDate, IssueStatus status,String sortDirection,String sortBy) {
 
-        return dsl.select(
+        var query= dsl.select(
                         DSL.field("s.student_name").as("student_name"),
                         DSL.field("b.book_title").as("book_title"),
                         DSL.field("l.librarian_name").as("librarian_name"),
@@ -72,8 +73,52 @@ public class BookIssueRepository {
                         .eq(DSL.field("b.book_id")))
                 .leftJoin(DSL.table("LIBRARIAN").as("l"))
                 .on(DSL.field("bi.librarian_id")
-                        .eq(DSL.field("l.librarian_id")))
-                .fetch();
+                        .eq(DSL.field("l.librarian_id")));
+
+        var conditon=DSL.noCondition();
+
+        if(active!=null){
+            if(active){
+                conditon=conditon.and(DSL.field("bi.active").isTrue());
+            }
+            conditon= conditon.and(DSL.field("bi.active").isFalse());
+        }
+        if(status!=null){
+            conditon=conditon.and(DSL.field("status").eq(status.name()));
+        }
+        if(approveDate!=null){
+            conditon=conditon.and(DSL.field("approved_date").eq(approveDate))
+                    .and(DSL.field("approved_date").isNotNull());
+        }
+        if(dueDate!=null){
+            conditon=conditon.and(DSL.field("due_date").eq(dueDate))
+                    .and(DSL.field("due_date").isNotNull());
+        }
+
+
+        OrderField<?> orderField=null;
+        if("approvedate".equalsIgnoreCase(sortBy)){
+            orderField="desc".equalsIgnoreCase(sortDirection)
+                    ?DSL.field("approved_date").isNotNull().desc()
+                    :DSL.field("approved_date").asc();
+        }
+
+        if("due_date".equalsIgnoreCase(sortBy)){
+            orderField="desc".equalsIgnoreCase(sortDirection)
+                    ?DSL.field("due_date").isNotNull().desc()
+                    :DSL.field("due_date").isNotNull().asc();
+        }
+
+
+        var orderResult=query
+                        .where(DSL.field("approved_date")
+                        .isNotNull())
+                        .orderBy(orderField)
+                        .fetch();
+
+
+        return orderField!=null? orderResult:query.where(conditon).fetch();
+
     }
 
 
@@ -150,9 +195,9 @@ public class BookIssueRepository {
     }
 
 
-    public Result<? extends  Record> getStudentBooks(UUID studentId){
+    public Result<? extends  Record> getStudentBooks(UUID studentId,Boolean active, LocalDate approveDate, LocalDate dueDate, IssueStatus status,String sortDirection,String sortBy){
 
-        return dsl.select(
+        var query= dsl.select(
                         DSL.field("s.student_name").as("student_name"),
                         DSL.field("b.book_title").as("book_title"),
                         DSL.field("l.librarian_name").as("librarian_name"),
@@ -179,8 +224,47 @@ public class BookIssueRepository {
                 .where(
                         DSL.field("bi.student_id")
                                 .eq(studentId)
-                )
-                .fetch();
+                );
+
+        var condition=DSL.noCondition();
+
+        if(active!=null){
+            if(active){
+                condition=condition.and(DSL.field("bi.active").isTrue());
+            }
+            condition=condition.and(DSL.field("bi.active").isFalse());
+        }
+
+        if(approveDate!=null){
+            condition=condition.and(DSL.field("approved_date").eq(approveDate));
+        }
+        if(dueDate!=null){
+            condition=condition.and(DSL.field("due_date").eq(dueDate));
+        }
+        if(status!=null){
+            condition=condition.and(DSL.field("status").eq(status.name()));
+        }
+        var finalQuery=query.and(condition);
+
+        OrderField<?> orderField=null;
+
+        if("approved_date".equalsIgnoreCase(sortBy)){
+            orderField="desc".equalsIgnoreCase(sortDirection)
+                    ?DSL.field("approved_date").isNotNull().desc()
+                    :DSL.field("approved_date").asc();
+        }
+
+        if("due_date".equalsIgnoreCase(sortBy)){
+            orderField="desc".equalsIgnoreCase(sortDirection)
+                    ?DSL.field("due_date").isNotNull().desc()
+                    :DSL.field("due_date").asc();
+        }
+
+
+
+
+
+        return orderField==null? finalQuery.fetch():finalQuery.orderBy(orderField).fetch();
     }
 
     public boolean studentAlreadyRequested(

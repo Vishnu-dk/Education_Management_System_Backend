@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class AdminAuthService {
+public  class AdminAuthService {
 
     private final AdminAuthRepository adminAuthRepository;
     private final LibrarianRepository librarianRepository;

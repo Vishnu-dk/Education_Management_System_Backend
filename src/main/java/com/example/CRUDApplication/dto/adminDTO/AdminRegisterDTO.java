@@ -20,7 +20,7 @@ public class AdminRegisterDTO {
     @NotNull
     private AdminRole role;
 
-    public String getEmail() {
+    public  String getEmail() {
         return email;
     }
 

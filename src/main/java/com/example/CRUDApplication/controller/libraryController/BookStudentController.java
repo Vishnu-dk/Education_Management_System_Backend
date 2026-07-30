@@ -1,6 +1,7 @@
 package com.example.CRUDApplication.controller.libraryController;
 
 import com.example.CRUDApplication.dto.libraryDTO.BookStudentResponseDTO;
+import com.example.CRUDApplication.entity.libraryEntity.BookCategory;
 import com.example.CRUDApplication.service.libraryService.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,19 @@ public class BookStudentController {
      * Get all active books
      */
     @GetMapping
-    public ResponseEntity<List<BookStudentResponseDTO>> getAllBooks() {
+    public ResponseEntity<List<BookStudentResponseDTO>> getAllBooks(
+            @RequestParam(required = false)
+            String title,
+            @RequestParam(required = false)
+            BookCategory category,
+            @RequestParam(required = false)
+            String sortBy,
+            @RequestParam(required = false)
+            String sortDirection
+    ) {
 
         List<BookStudentResponseDTO> books =
-                bookService.getAllBooksForStudents();
+                bookService.getAllBooksForStudents(title,category,sortBy,sortDirection);
 
         return ResponseEntity.ok(books);
     }
