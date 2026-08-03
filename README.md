@@ -72,7 +72,7 @@ Future modules may include:
 
 # Project Architecture
 
-
+```
 src/main/java
 │
 ├── config
@@ -110,7 +110,7 @@ src/main/java
 │   └── libraryMapper
 │
 └── exception
-
+```
 
 ---
 
@@ -192,7 +192,7 @@ src/main/java
 
 # Book Request Workflow
 
-text
+```text
 Student
     │
     ▼
@@ -215,7 +215,7 @@ Return Book
   |
   ▼
 RETURNED
-
+```
 
 ---
 
@@ -223,9 +223,9 @@ RETURNED
 
 When a book is returned after its due date:
 
-
+```
 Fine = Days Late × ₹5
-
+```
 
 Example:
 
@@ -234,9 +234,9 @@ Example:
 
 Fine:
 
-
+```
 5 × ₹5 = ₹25
-
+```
 
 ---
 
@@ -282,38 +282,38 @@ Fine:
 
 ### Student
 
-
+```
 POST /api/student/auth/register
 POST /api/student/auth/login
-
+```
 
 ### Admin
 
-
+```
 POST /api/admin/auth/register
 POST /api/admin/auth/login
-
+```
 
 ---
 
 ## Student Management
 
-
+```
 GET    /api/students
 GET    /api/students/{id}
 PUT    /api/students/{id}
 DELETE /api/students/{id}
-
+```
 
 ---
 
 ## Librarian Management
 
-
+```
 GET    /api/librarians/{id}
 PUT    /api/librarians/{id}
 DELETE /api/librarians/{id}
-
+```
 
 ---
 
@@ -321,21 +321,21 @@ DELETE /api/librarians/{id}
 
 ### Admin
 
-
+```
 POST   /api/admin/books
 GET    /api/admin/books
 GET    /api/admin/books/{id}
 PUT    /api/admin/books/{id}
 PATCH  /api/admin/books/{id}/activate
 PATCH  /api/admin/books/{id}/deactivate
-
+```
 
 ### Students
 
-
+```
 GET /api/student/books
 GET /api/student/books/{id}
-
+```
 
 ---
 
@@ -343,20 +343,20 @@ GET /api/student/books/{id}
 
 ### Student
 
-
+```
 POST /api/student/book-requests
 GET  /api/student/book-requests/my-books
-
+```
 
 ### Admin
 
-
+```
 GET   /api/admin/book-requests
 PATCH /api/admin/book-requests/{issueId}/approve
 PATCH /api/admin/book-requests/{issueId}/reject
 PATCH /api/admin/book-requests/{issueId}/return
 PATCH /api/admin/book-requests/{issueId}/fine-paid
-
+```
 
 ---
 
@@ -371,9 +371,9 @@ Custom exception support for:
 
 Global exception handling is implemented using:
 
-java
+```java
 @RestControllerAdvice
-
+```
 
 ---
 
@@ -404,5 +404,6 @@ java
 
 # Author
 
-Vishnu Divakar
-Developer | Java | Spring Boot | PostgreSQL | jOOQ
+**Vishnu Divakar**
+
+Backend Developer | Java | Spring Boot | PostgreSQL | jOOQ
