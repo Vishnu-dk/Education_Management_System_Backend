@@ -1,61 +1,52 @@
-# Library Management System - Backend
+# Education Management System (Backend)
 
-A secure and scalable Library Management System backend built using Spring Boot, PostgreSQL, JWT Authentication, and jOOQ.
+A modular Education Management System built using Spring Boot, PostgreSQL, jOOQ, and JWT Authentication.
 
-This application supports student and librarian workflows including authentication, book management, issue requests, approvals, returns, and fine management.
+The project is designed as a scalable education platform where multiple academic modules can be added over time. The current implementation includes student management, role-based authentication, librarian administration, and a complete library management module.
 
----
+## Current Modules
 
-## Features
+### Authentication & Security
+- JWT Authentication
+- Spring Security
+- Role-Based Authorization
+- Student Login & Registration
+- Admin Login & Registration
 
-### Authentication & Authorization
+### Student Management
+- Student Profile Management
+- Student CRUD Operations
+- Course Information Management
 
-- JWT-based authentication
-- Role-based access control
-- Student login and registration
-- Admin login and registration
-- Librarian role support
-- Spring Security integration
+### Librarian Management
+- Librarian Profile Management
+- Role-Based Access Control
 
-### Student Features
+### Library Management
+- Book Inventory Management
+- Book Issue Requests
+- Approval & Rejection Workflow
+- Book Returns
+- Fine Calculation
+- Book Availability Tracking
 
-- Register and login
-- View available books
-- Filter books by category and title
-- Request books for issue
-- Track issued books
-- View request status
-- View return and fine details
-- Update profile information
+## Vision
 
-### Librarian Features
+This project is being developed as a complete Education Management Platform.
 
-- Manage library books
-- Add new books
-- Update book information
-- Activate or deactivate books
-- Approve issue requests
-- Reject issue requests
-- Process book returns
-- Mark fines as paid
-- Manage librarian profile
+Future modules may include:
 
-### Book Management
-
-- CRUD operations for books
-- Book categorization
-- Availability tracking
-- Copy management
-- Search and sorting support
-
-### Issue Management
-
-- Book issue requests
-- Approval workflow
-- Return processing
-- Overdue fine calculation
-- Duplicate request prevention
-- Active request tracking
+- Faculty Management
+- Attendance Management
+- Course Management
+- Assignment Submission
+- Examination Management
+- Grade Management
+- Timetable Management
+- Notification System
+- Fees Management
+- Student Portal
+- Analytics Dashboard
 
 ---
 
